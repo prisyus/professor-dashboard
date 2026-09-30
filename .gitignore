@@ -1,0 +1,164 @@
+const studentData = [
+  { name: 'Ava Thompson', course: 'BIO 101', status: 'Present', score: 94 },
+  { name: 'Marcus Lee', course: 'ENG 210', status: 'On Time', score: 88 },
+  { name: 'Sarah Chen', course: 'CS 220', status: 'Present', score: 96 },
+  { name: 'Noah Patel', course: 'BIO 101', status: 'Late', score: 79 },
+  { name: 'Emily Davis', course: 'ENG 210', status: 'Absent', score: 74 },
+  { name: 'Lucas Garcia', course: 'CS 220', status: 'Present', score: 92 },
+  { name: 'Priya Singh', course: 'BIO 101', status: 'On Time', score: 89 },
+  { name: 'Daniel Brown', course: 'ENG 210', status: 'Present', score: 85 }
+];
+
+const gradeData = [
+  { assignment: 'Quiz 1', course: 'BIO 101', average: 88, submissions: 38 },
+  { assignment: 'Essay Draft', course: 'ENG 210', average: 82, submissions: 26 },
+  { assignment: 'Lab Project', course: 'CS 220', average: 91, submissions: 24 },
+  { assignment: 'Midterm', course: 'BIO 101', average: 85, submissions: 40 },
+  { assignment: 'Presentation', course: 'ENG 210', average: 87, submissions: 22 },
+  { assignment: 'Coding Quiz', course: 'CS 220', average: 93, submissions: 27 }
+];
+
+function renderStudentTable() {
+  const searchInput = document.getElementById('studentSearch');
+  const filterSelect = document.getElementById('statusFilter');
+  const tableBody = document.getElementById('studentTableBody');
+
+  const query = searchInput.value.trim().toLowerCase();
+  const selectedStatus = filterSelect.value;
+
+  const filtered = studentData.filter((student) => {
+    const matchesQuery =
+      student.name.toLowerCase().includes(query) ||
+      student.course.toLowerCase().includes(query);
+    const matchesStatus = selectedStatus === 'all' || student.status === selectedStatus;
+    return matchesQuery && matchesStatus;
+  });
+
+  tableBody.innerHTML = filtered
+    .map((student) => {
+      const statusClass =
+        student.status === 'Late'
+          ? 'late'
+          : student.status === 'Absent'
+          ? 'absent'
+          : '';
+
+      return `
+        <tr>
+          <td>${student.name}</td>
+          <td>${student.course}</td>
+          <td><span class="status-pill ${statusClass}">${student.status}</span></td>
+          <td>${student.score}</td>
+        </tr>
+      `;
+    })
+    .join('');
+}
+
+function renderGradesTable() {
+  const tableBody = document.getElementById('gradesTableBody');
+
+  tableBody.innerHTML = gradeData
+    .map(
+      (grade) => `
+        <tr>
+          <td>${grade.assignment}</td>
+          <td>${grade.course}</td>
+          <td>${grade.average}%</td>
+          <td>${grade.submissions}</td>
+        </tr>
+      `
+    )
+    .join('');
+}
+
+function initCharts() {
+  const enrollmentCtx = document.getElementById('enrollmentChart');
+  const performanceCtx = document.getElementById('performanceChart');
+
+  new Chart(enrollmentCtx, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      datasets: [
+        {
+          label: 'Students enrolled',
+          data: [400, 430, 520, 610, 720, 830, 980],
+          borderColor: '#2c8d5f',
+          backgroundColor: 'rgba(44, 141, 95, 0.12)',
+          fill: true,
+          borderWidth: 3,
+          tension: 0.35,
+          pointRadius: 4,
+          pointBackgroundColor: '#2c8d5f'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false }
+        },
+        y: {
+          beginAtZero: false,
+          grid: { color: 'rgba(30, 42, 35, 0.08)' }
+        }
+      }
+    }
+  });
+
+  new Chart(performanceCtx, {
+    type: 'bar',
+    data: {
+      labels: ['BIO', 'ENG', 'CS', 'MATH', 'ART', 'CHEM'],
+      datasets: [
+        {
+          label: 'Average score',
+          data: [88, 82, 91, 86, 90, 84],
+          backgroundColor: [
+            '#2c8d5f',
+            '#4aa26e',
+            '#65b884',
+            '#87cf9a',
+            '#a5dbaf',
+            '#cbead2'
+          ],
+          borderRadius: 8
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          max: 100,
+          grid: { color: 'rgba(30, 42, 35, 0.08)' }
+        },
+        x: {
+          grid: { display: false }
+        }
+      }
+    }
+  });
+}
+
+document.getElementById('studentSearch').addEventListener('input', renderStudentTable);
+document.getElementById('statusFilter').addEventListener('change', renderStudentTable);
+
+renderStudentTable();
+renderGradesTable();
+initCharts();

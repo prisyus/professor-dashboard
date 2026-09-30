@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professor Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="dashboard-shell">
+      <aside class="sidebar">
+        <div class="brand-row">
+          <div class="brand-mark">P</div>
+          <div>
+            <span class="eyebrow">School portal</span>
+            <h2>Professor</h2>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Sidebar navigation">
+          <button class="nav-item active" type="button">
+            <span class="icon">◫</span>
+            <span>Overview</span>
+          </button>
+          <button class="nav-item" type="button">
+            <span class="icon">▣</span>
+            <span>Courses</span>
+          </button>
+          <button class="nav-item" type="button">
+            <span class="icon">◌</span>
+            <span>Students</span>
+          </button>
+          <button class="nav-item" type="button">
+            <span class="icon">✓</span>
+            <span>Grades</span>
+          </button>
+          <button class="nav-item" type="button">
+            <span class="icon">⚙</span>
+            <span>Settings</span>
+          </button>
+        </nav>
+
+        <div class="mini-panel">
+          <label class="mini-label">This week</label>
+          <div class="mini-stat-row">
+            <strong>12</strong>
+            <span>Classes Scheduled</span>
+          </div>
+          <div class="mini-stat-row">
+            <strong>94%</strong>
+            <span>Attendance Target</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <span class="eyebrow">Welcome back</span>
+            <h1>Dashboard</h1>
+          </div>
+
+          <div class="topbar-actions">
+            <button class="secondary-btn" type="button">Export</button>
+            <div class="profile-box">
+              <div class="avatar">DR</div>
+              <div>
+                <strong>Dr. Reena Khan</strong>
+                <span>Biology Department</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="stats-grid">
+          <article class="stat-card">
+            <span class="stat-label">Total Students</span>
+            <strong>1,248</strong>
+            <small>+12% this term</small>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Courses</span>
+            <strong>18</strong>
+            <small>6 active this week</small>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Assignments</span>
+            <strong>94</strong>
+            <small>27 pending review</small>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Attendance</span>
+            <strong>92%</strong>
+            <small>Above target</small>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <div class="panel chart-panel">
+            <div class="section-head">
+              <h3>Enrollment overview</h3>
+              <button class="chip-btn" type="button">Monthly</button>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="enrollmentChart"></canvas>
+            </div>
+          </div>
+
+          <div class="panel quick-panel">
+            <div class="section-head">
+              <h3>Quick actions</h3>
+            </div>
+            <div class="quick-actions">
+              <button type="button">Schedule Lecture</button>
+              <button type="button">Create Assignment</button>
+              <button type="button">Message Students</button>
+              <button type="button">View Reports</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-grid lower-grid">
+          <div class="panel">
+            <div class="section-head">
+              <h3>Courses</h3>
+              <button class="secondary-btn" type="button">+ Add course</button>
+            </div>
+
+            <div class="course-list">
+              <article class="course-card green">
+                <div class="course-top">
+                  <h4>Intro to Biology</h4>
+                  <span class="course-tag">BIO 101</span>
+                </div>
+                <div class="course-meta">
+                  <label>
+                    Students
+                    <strong>42</strong>
+                  </label>
+                  <label>
+                    Completion
+                    <strong>78%</strong>
+                  </label>
+                </div>
+                <div class="progress-bar"><span style="width: 78%"></span></div>
+              </article>
+
+              <article class="course-card mint">
+                <div class="course-top">
+                  <h4>Modern Literature</h4>
+                  <span class="course-tag">ENG 210</span>
+                </div>
+                <div class="course-meta">
+                  <label>
+                    Students
+                    <strong>31</strong>
+                  </label>
+                  <label>
+                    Completion
+                    <strong>64%</strong>
+                  </label>
+                </div>
+                <div class="progress-bar"><span style="width: 64%"></span></div>
+              </article>
+
+              <article class="course-card pale-blue">
+                <div class="course-top">
+                  <h4>Data Structures</h4>
+                  <span class="course-tag">CS 220</span>
+                </div>
+                <div class="course-meta">
+                  <label>
+                    Students
+                    <strong>28</strong>
+                  </label>
+                  <label>
+                    Completion
+                    <strong>86%</strong>
+                  </label>
+                </div>
+                <div class="progress-bar"><span style="width: 86%"></span></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="section-head">
+              <h3>Performance</h3>
+            </div>
+            <div class="chart-wrap small">
+              <canvas id="performanceChart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-grid lower-grid">
+          <div class="panel table-panel">
+            <div class="section-head">
+              <h3>Student roster</h3>
+              <button class="secondary-btn" type="button">+ Add student</button>
+            </div>
+
+            <div class="table-toolbar">
+              <input type="search" id="studentSearch" placeholder="Search students" />
+              <select id="statusFilter">
+                <option value="all">All statuses</option>
+                <option value="Present">Present</option>
+                <option value="On Time">On Time</option>
+                <option value="Late">Late</option>
+                <option value="Absent">Absent</option>
+              </select>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Status</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody id="studentTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel table-panel">
+            <div class="section-head">
+              <h3>Grades</h3>
+              <button class="secondary-btn" type="button">+ Add grade</button>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Assignment</th>
+                    <th>Course</th>
+                    <th>Average</th>
+                    <th>Submissions</th>
+                  </tr>
+                </thead>
+                <tbody id="gradesTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel settings-panel">
+          <div class="section-head">
+            <h3>Profile & Settings</h3>
+          </div>
+          <div class="settings-list">
+            <div class="setting-row">
+              <span>Profile Details</span>
+              <strong>Updated 2 days ago</strong>
+            </div>
+            <div class="setting-row">
+              <span>Notifications</span>
+              <strong>Enabled</strong>
+            </div>
+            <div class="setting-row">
+              <span>Office Hours</span>
+              <strong>Tue & Thu · 2:00 PM</strong>
+            </div>
+            <div class="setting-row">
+              <span>Security</span>
+              <strong>Two-step verification</strong>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
